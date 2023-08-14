@@ -1,12 +1,12 @@
 <template>
 	<li>
-			<input type="checkbox" :checked="checked" /> {{name}}
+			<input type="checkbox" :checked="idol.checked" /> {{idol.name}}
 	</li>
 </template>
 
 <script>
 	export default {
 			name : "CheckboxItem",
-			props : ["name", "checked"],
+			props : ["idol"],
 	}
 </script>
