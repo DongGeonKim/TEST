@@ -10,6 +10,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .child { background-color: yellow; border:solid 1px black; margin:1.5em; padding: 1.0em;  }
 </style>
+<!-- 8.1.2 CSS 모률 -->
