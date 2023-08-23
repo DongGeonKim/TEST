@@ -1,47 +1,49 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="header">
+    <h1 class="headerText">태평양 전쟁의 해전</h1>
+    <nav>
+      <ul class="nav nav-tabs nav-fill">
+        <li v-for="tab in tabs" :key="tab.id" class="nav-item">
+          <a style="cursor:pointer;" class="nav-link" 
+            :class="{ active : tab.id === currentTab }"
+            @click="changeTab(tab.id)">{{tab.label}}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container">
+    <keep-alive include="MidwayTab,CoralSeaTab">
+      <component :is="currentTab"></component>
+    </keep-alive>
+  </div>
 </template>
+<script>
+import CoralSeaTab from './components/CoralSeaTab.vue'
+import LeyteGulfTab from './components/LeyteGulfTab.vue'
+import MidwayTab from './components/MidwayTab.vue'
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+export default {
+  name: 'App',
+  components : { CoralSeaTab, LeyteGulfTab, MidwayTab },
+  data() {
+    return { 
+      currentTab : 'CoralSeaTab',
+      tabs : [ 
+        { id:"CoralSeaTab", label:"산호해 해전" }, 
+        { id:"MidwayTab", label:"미드웨이 해전" }, 
+        { id:"LeyteGulfTab", label:"레이테만 해전" }
+      ] 
+    }
+  },
+  methods : {
+    changeTab(tab) {
+      this.currentTab = tab;
+    }
   }
 }
+</script>
+<style>
+.header { padding: 20px 0px 0px 20px; }
+.headerText { padding: 0px 20px 40px 20px; } 
+.tab { padding: 30px }
 </style>
