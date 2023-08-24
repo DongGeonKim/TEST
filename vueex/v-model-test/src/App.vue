@@ -24,4 +24,3 @@ export default {
   }
 }
 </script>
-<!-- 8.5 provide , inject를 이용한 공용데이터 사용 -->
