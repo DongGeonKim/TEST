@@ -24,3 +24,4 @@ export default {
     }
 }
 </script>
+<!-- 9.3.2 reactive -->
