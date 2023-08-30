@@ -21,6 +21,7 @@ const requestAPI = () => {
 			return todoList[0].id;
 		})
 		.then((id) => {
+			console.log('id', id);
 			return axios.get(todoUrlPrefix + id);
 		})
 		.then((response) => {
@@ -28,6 +29,7 @@ const requestAPI = () => {
 			return todoList[1].id;
 		})
 		.then((id) => {
+			console.log('id', id);
 			axios.get(todoUrlPrefix + id).then((response) => {
 				console.log("## 두번째 Todo : ", response.data);
 			});
