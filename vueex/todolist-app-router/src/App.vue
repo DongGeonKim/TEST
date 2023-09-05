@@ -2,20 +2,24 @@
 	<div class="container">
 		<Header />
 		<router-view />
+		<Loading v-if="states.isLoading" />
 	</div>
 </template>
 
 <script setup>
 import { reactive, provide, computed } from 'vue'
 import Header from '@/components/Header.vue'
+import Loading from '@/components/Loading.vue'
 import axios from 'axios';
 
 const owner = "gdhong";
-//의도적 지연 시간을 발생시키는 /todolist_long 이용
 const BASEURI = "/api/todolist_long";
-const states = reactive({ todoList: [] })
+
+const states = reactive({ todoList: [], isLoading: false })
+
 //TodoList 목록을 조회합니다.
 const fetchTodoList = async () => {
+	states.isLoading = true;
 	try {
 		const response = await axios.get(BASEURI + `/${owner}`);
 		if (response.status === 200) {
@@ -26,9 +30,12 @@ const fetchTodoList = async () => {
 	} catch (error) {
 		alert('에러발생 :' + error);
 	}
+	states.isLoading = false;
 }
+
 // 새로운 TodoItem을 추가합니다.
 const addTodo = async ({ todo, desc }, successCallback) => {
+	states.isLoading = true;
 	try {
 		const payload = { todo, desc };
 		const response = await axios.post(BASEURI + `/${owner}`, payload)
@@ -41,9 +48,11 @@ const addTodo = async ({ todo, desc }, successCallback) => {
 	} catch (error) {
 		alert('에러발생 :' + error);
 	}
+	states.isLoading = false;
 }
 // 기존 TodoItem을 변경합니다.
 const updateTodo = async ({ id, todo, desc, done }, successCallback) => {
+	states.isLoading = true;
 	try {
 		const payload = { todo, desc, done };
 		const response = await axios.put(BASEURI + `/${owner}/${id}`, payload)
@@ -57,9 +66,11 @@ const updateTodo = async ({ id, todo, desc, done }, successCallback) => {
 	} catch (error) {
 		alert('에러발생 :' + error);
 	}
+	states.isLoading = false;
 }
 //기존 TodoItem을 삭제합니다.
 const deleteTodo = async (id) => {
+	states.isLoading = true;
 	try {
 		const response = await axios.delete(BASEURI + `/${owner}/${id}`)
 		if (response.data.status === "success") {
@@ -71,9 +82,11 @@ const deleteTodo = async (id) => {
 	} catch (error) {
 		alert('에러발생 :' + error);
 	}
+	states.isLoading = false;
 }
 //기존 TodoItem의 완료여부(done) 값을 토글합니다.
 const toggleDone = async (id) => {
+	states.isLoading = true;
 	try {
 		const response = await axios.put(BASEURI + `/${owner}/${id}/done`)
 		if (response.data.status === "success") {
@@ -85,8 +98,8 @@ const toggleDone = async (id) => {
 	} catch (error) {
 		alert('에러발생 :' + error);
 	}
+	states.isLoading = false;
 }
-
 
 provide('todoList', computed(() => states.todoList));
 provide('actions', { addTodo, deleteTodo, toggleDone, updateTodo, fetchTodoList })
