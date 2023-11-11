@@ -2,3 +2,6 @@
 **/out/
 **/.gradle/
 **/.idea/
+**/*.class
+**/.classpath
+**/.project
