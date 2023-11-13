@@ -1,3 +1,6 @@
-D:\Git\test\kafka\tool\kafka>bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+cd D:\Git\test\kafka\tool\kafka
+cd D:\test\kafka\tool\kafka
 
-D:\Git\test\kafka\tool\kafka>bin\windows\kafka-server-start.bat config\server.properties
+>bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+>bin\windows\kafka-server-start.bat config\server.properties
