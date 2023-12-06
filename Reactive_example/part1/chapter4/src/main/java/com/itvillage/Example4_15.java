@@ -13,9 +13,10 @@ public class Example4_15 {
     public static void main(String[] args) {
         List<CryptoCurrency> cryptoCurrencies = SampleData.cryptoCurrencies;
         List<CryptoCurrency> filtered =
-                filter(cryptoCurrencies,
-                        cc -> cc.getUnit() == CryptoCurrency.CurrencyUnit.BTC ||
-                        cc.getUnit() == CryptoCurrency.CurrencyUnit.ETH);
+                filter(
+                		cryptoCurrencies,
+                        cc -> cc.getUnit() == CryptoCurrency.CurrencyUnit.BTC || cc.getUnit() == CryptoCurrency.CurrencyUnit.ETH
+                        );
 
         int totalPayment = calculatePayment(filtered, cc -> cc.getPrice() * 2);
 
