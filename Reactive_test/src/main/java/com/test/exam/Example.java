@@ -9,11 +9,14 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 public class Example {
-    public static void main(String[] args) {
-    	Flux<String> flux =
-                Mono.justOrEmpty("Steve")
-                        .concatWith(Mono.justOrEmpty("Jobs").concatWith(Mono.justOrEmpty("abs")));
-        flux.subscribe(System.out::println);
+	public static void main(String[] args) {
+    	Flux.concat(
+                Flux.just("Mercury", "Venus", "Earth"),
+                Flux.just("Mars", "Jupiter", "Saturn"),
+                Flux.just("Uranus", "Neptune", "Pluto"))
+        .collectList()
+        //.subscribe(planets -> System.out.println(planets));
+        .subscribe(System.out::println);
     }
 }
 	
