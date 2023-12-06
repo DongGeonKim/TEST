@@ -21,23 +21,24 @@ public class Example7_4 {
                 .toUri();
 
         Mono<String> mono = getWorldTime(worldTimeUri).cache();
+        
         mono.subscribe(dateTime -> log.info("# dateTime 1: {}", dateTime));
         Thread.sleep(2000);
+        
         mono.subscribe(dateTime -> log.info("# dateTime 2: {}", dateTime));
-
         Thread.sleep(2000);
     }
 
     private static Mono<String> getWorldTime(URI worldTimeUri) {
         return WebClient.create()
-                .get()
-                .uri(worldTimeUri)
-                .retrieve()
-                .bodyToMono(String.class)
-                .map(response -> {
-                    DocumentContext jsonContext = JsonPath.parse(response);
-                    String dateTime = jsonContext.read("$.datetime");
-                    return dateTime;
-                });
+		                .get()
+		                .uri(worldTimeUri)
+		                .retrieve()
+		                .bodyToMono(String.class)
+		                .map(response -> {
+		                    DocumentContext jsonContext = JsonPath.parse(response);
+		                    String dateTime = jsonContext.read("$.datetime");
+		                    return dateTime;
+		                });
     }
 }
