@@ -19,10 +19,10 @@ public class Example9_9 {
 
         multicastSink.emitNext(1, FAIL_FAST);
         multicastSink.emitNext(2, FAIL_FAST);
-
         fluxView.subscribe(data -> log.info("# Subscriber1: {}", data));
         fluxView.subscribe(data -> log.info("# Subscriber2: {}", data));
 
         multicastSink.emitNext(3, FAIL_FAST);
+        
     }
 }
