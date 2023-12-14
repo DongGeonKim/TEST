@@ -8,8 +8,6 @@ public class Example14_01 {
     public static void main(String[] args) {
         Mono
             .justOrEmpty(null)
-            .subscribe(data -> {},
-                    error -> {},
-                    () -> log.info("# onComplete"));
+            .subscribe(data -> {}, error -> {}, () -> log.info("# onComplete"));
     }
 }
