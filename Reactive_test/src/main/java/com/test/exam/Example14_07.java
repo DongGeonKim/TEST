@@ -16,8 +16,8 @@ public class Example14_07 {
         Mono
             .just("Hello")
             .delayElement(Duration.ofSeconds(3))
-            .switchIfEmpty(sayDefault())
-//            .switchIfEmpty(Mono.defer(() -> sayDefault()))
+//            .switchIfEmpty(sayDefault())
+            .switchIfEmpty(Mono.defer(() -> sayDefault()))
             .subscribe(data -> log.info("# onNext: {}", data));
 
         Thread.sleep(3500);

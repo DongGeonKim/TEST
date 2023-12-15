@@ -13,8 +13,7 @@ public class Example14_06 {
     public static void main(String[] args) throws InterruptedException {
         log.info("# start: {}", LocalDateTime.now());
         Mono<LocalDateTime> justMono = Mono.just(LocalDateTime.now());
-        Mono<LocalDateTime> deferMono = Mono.defer(() ->
-                                                    Mono.just(LocalDateTime.now()));
+        Mono<LocalDateTime> deferMono = Mono.defer(() -> Mono.just(LocalDateTime.now()));
 
         Thread.sleep(2000);
 

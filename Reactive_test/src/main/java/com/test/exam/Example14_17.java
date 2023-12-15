@@ -16,8 +16,7 @@ import reactor.util.function.Tuple2;
 @Slf4j
 public class Example14_17 {
     public static void main(String[] args) throws InterruptedException {
-        Map<CovidVaccine, Tuple2<CovidVaccine, Integer>> vaccineMap =
-        		SampleData.getCovidVaccines();
+        Map<CovidVaccine, Tuple2<CovidVaccine, Integer>> vaccineMap = SampleData.getCovidVaccines();
         Flux
             .fromIterable(SampleData.coronaVaccineNames)
             .filterWhen(vaccine -> Mono
