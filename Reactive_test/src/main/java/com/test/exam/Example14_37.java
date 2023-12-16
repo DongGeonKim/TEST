@@ -10,6 +10,7 @@ import reactor.util.function.Tuple3;
  */
 @Slf4j
 public class Example14_37 {
+	
     public static void main(String[] args) throws InterruptedException {
         getInfectedPersonsPerHour(10, 21)
                 .subscribe(tuples -> {
