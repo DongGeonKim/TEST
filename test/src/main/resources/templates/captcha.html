@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+	
+	<title>캡챠 테스트</title>
+</head>
+
+<body>
+	<h1>1212</h1>
+	<div id="captchImg" style="width: 200px; height: 90px;"></div>
+	
+	<input type="button" id="refreshImg" value="새로고침" /><br/><br/>
+	
+	<input type="text" id="captchaText">
+	<input type="hidden" id="captchaKey" value="">
+	
+	<input type="button" id="submitBtn" value="검증" /><br/>
+	결과값 : <span id="resultValue"></span>
+	
+	<br/><br/>
+	테스트<br/>
+	<form id="testForm">
+		<input type="hidden" name="test1" value=1 />
+		<input type="hidden" name="test2" value='aaa' />
+		<input type="hidden" name="test3" value='ddd' />
+	</form>
+	<input type="button" id="testBtn" value="테스트" />
+</body>
+<script>
+	$(document).ready(() => {
+		
+		$("#testBtn").click(function(e) {
+			$.ajax({
+	            type: "POST",
+	            url: "/formSerializeTest",
+	            data: $("#testForm").serialize(),
+	            success: function(response) {
+	            	console.log("success :", response);
+	            },
+	            error: function(error) {
+	                console.error("error :", error);
+	            }
+	        });
+		});
+		
+		$("#refreshImg").click(function(e) {
+			getCaptchaObj();
+		});
+		
+		$("#submitBtn").click(function(e) {
+	        let formData = {
+	        	captchaText:$("#captchaText").val(), 
+	        	captchaKey:$("#captchaKey").val()
+	        };
+	        $.ajax({
+	            type: "POST",
+	            url: "/captchaCheck",
+	            data: formData,
+	            success: function(response) {
+	            	console.log("success :", response);
+	            	$("#resultValue").text(JSON.parse(response).result);
+	            },
+	            error: function(error) {
+	                console.error("error :", error);
+	            }
+	        });
+	    });
+		
+		getCaptchaObj();
+	});
+	
+	function getCaptchaObj(){
+		$.ajax({
+	        url: '/captchaGetKey',
+	        type: 'GET',
+	        dataType : 'json',
+	        success : function (data) {
+	            const captchKey = data.key;
+	            $("#captchaKey").val(captchKey);
+	            $("#captchImg").html('<img title="캡차이미지" src="/captchaGetImg?key='+captchKey+'" alt="캡차이미지"/>');
+	        }
+	    });
+	}
+</script>
