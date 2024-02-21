@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class ApiExamCaptchaImage {
 	public static void main(String[] args) throws Exception {
-		String clientId = "NJCCsaFJinO7rnvkNBIO"; // 애플리케이션 클라이언트 아이디값";
-		String clientSecret = "5x5DkebE7U"; // 애플리케이션 클라이언트 시크릿값";
+		String clientId = ""; // 애플리케이션 클라이언트 아이디값";
+		String clientSecret = ""; // 애플리케이션 클라이언트 시크릿값";
 
 		String key = "SAB3KRgwCf4OKMCC"; // https://openapi.naver.com/v1/captcha/nkey 호출로 받은 키값
 		String apiURL = "https://openapi.naver.com/v1/captcha/ncaptcha.bin?key=" + key;

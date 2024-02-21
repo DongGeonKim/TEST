@@ -29,8 +29,8 @@ public class PageController {
 	@GetMapping("/captchaGetKey")
 	@ResponseBody
 	public String captchaGetKey(HttpServletResponse response) throws Exception{
-		String clientId = "NJCCsaFJinO7rnvkNBIO"; // 애플리케이션 클라이언트 아이디값";
-		String clientSecret = "5x5DkebE7U"; // 애플리케이션 클라이언트 시크릿값";
+		String clientId = ""; // 애플리케이션 클라이언트 아이디값";
+		String clientSecret = ""; // 애플리케이션 클라이언트 시크릿값";
 
 		String code = "0"; // 키 발급시 0, 캡차 이미지 비교시 1로 세팅
 		String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code;
@@ -47,8 +47,8 @@ public class PageController {
 	@GetMapping("/captchaGetImg")
 	public void captchaGetImg(HttpServletResponse response, @RequestParam("key") String key) throws Exception{
 		
-		String clientId = "NJCCsaFJinO7rnvkNBIO"; // 애플리케이션 클라이언트 아이디값";
-		String clientSecret = "5x5DkebE7U"; // 애플리케이션 클라이언트 시크릿값";
+		String clientId = ""; // 애플리케이션 클라이언트 아이디값";
+		String clientSecret = ""; // 애플리케이션 클라이언트 시크릿값";
 
 		String apiURL = "https://openapi.naver.com/v1/captcha/ncaptcha.bin?key=" + key;
 
@@ -67,8 +67,8 @@ public class PageController {
 	@ResponseBody
 	public String captchaCheck(@RequestParam Map<String, String> paramMap) throws Exception{
 		System.out.println("paramMap : " + paramMap);
-		String clientId = "NJCCsaFJinO7rnvkNBIO"; // 애플리케이션 클라이언트 아이디값";
-		String clientSecret = "5x5DkebE7U"; // 애플리케이션 클라이언트 시크릿값";
+		String clientId = ""; // 애플리케이션 클라이언트 아이디값";
+		String clientSecret = ""; // 애플리케이션 클라이언트 시크릿값";
 
 		String code = "1"; // 키 발급시 0, 캡차 이미지 비교시 1로 세팅
 		String key = paramMap.get("captchaKey"); // 캡차 키 발급시 받은 키값
